@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MyrepostatspythonConfig(AppConfig):
+class HomepageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'MyRepoStatsPython'
+    name = 'homepage'
