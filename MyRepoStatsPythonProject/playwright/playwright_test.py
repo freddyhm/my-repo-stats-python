@@ -1,23 +1,21 @@
-import pytest
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
 from playwright.sync_api import sync_playwright
 
-@pytest.fixture(scope="module")
-def browser():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
-        context = browser.new_context()
-        yield browser, context
-        context.close()
-        browser.close()
+class MyViewTests(StaticLiveServerTestCase): 
+    @classmethod 
+    def setUpClass(cls): 
+        super().setUpClass() 
+        cls.playwright = sync_playwright().start() 
+        cls.browser = cls.playwright.chromium.launch() 
 
-@pytest.mark.usefixtures("browser")
-def test_example(browser):
-    browser, context = browser
-    page = context.new_page()
+    @classmethod 
+    def tearDownClass(cls): 
+        cls.browser.close() 
+        cls.playwright.stop() 
+        super().tearDownClass() 
 
-    # Your Playwright test code here
-    page.goto("https://example.com")
-    assert page.title() == "Example Domain"
-
-    # Close the page
-    page.close()
+    def test_login(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert page.title() == "MyRepoStatsPython"
+        page.close()
