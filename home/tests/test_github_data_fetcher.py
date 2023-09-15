@@ -1,8 +1,8 @@
 import unittest
 from parameterized import parameterized
-from github_data_fetcher import get_github_commits
-from github_data_fetcher import get_part_of_day
-from github_data_fetcher import Part_Of_Day
+from home.services.github_data_fetcher import get_github_commits
+from home.services.github_data_fetcher import get_part_of_day
+from home.services.github_data_fetcher import Part_Of_Day
 
 class TestGithubDataFetcher(unittest.TestCase):
 
