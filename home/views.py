@@ -1,5 +1,5 @@
-from github import get_github_commits
-from github import Part_Of_Day
+from github_data_fetcher import get_github_commits
+from github_data_fetcher import Part_Of_Day
 from django.shortcuts import render
 
 def home(request):

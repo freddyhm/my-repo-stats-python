@@ -1,10 +1,10 @@
 import unittest
 from parameterized import parameterized
-from github import get_github_commits
-from github import get_part_of_day
-from github import Part_Of_Day
+from github_data_fetcher import get_github_commits
+from github_data_fetcher import get_part_of_day
+from github_data_fetcher import Part_Of_Day
 
-class TestGithub(unittest.TestCase):
+class TestGithubDataFetcher(unittest.TestCase):
 
     def test_get_part_of_day_percentage_of_commits(self):
         commits = get_github_commits()
