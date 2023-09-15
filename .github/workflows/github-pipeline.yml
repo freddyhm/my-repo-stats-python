@@ -18,8 +18,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-playwright
-      - name: Set Django Settings Module
-        run: echo "export DJANGO_SETTINGS_MODULE=myproject.settings" >> $GITHUB_ENV
       - name: Test with pytest
+        env:
+          DJANGO_SETTINGS_MODULE: MyRepoStatsPythonProject.settings
         run: |
           pytest MyRepoStatsPythonProject/playwright
