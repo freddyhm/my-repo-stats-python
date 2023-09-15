@@ -1,19 +1,10 @@
+
 import unittest
 from parameterized import parameterized
-from home.services.github_data_fetcher import get_github_commits
 from home.services.github_data_fetcher import get_part_of_day
 from home.services.github_data_fetcher import Part_Of_Day
 
-class TestGithubDataFetcher(unittest.TestCase):
-
-    def test_get_part_of_day_percentage_of_commits(self):
-        commits = get_github_commits()
-        assert isinstance(commits, dict)
-        assert Part_Of_Day.MORNING in commits
-        assert Part_Of_Day.AFTERNOON in commits
-        assert Part_Of_Day.EVENING in commits
-        assert Part_Of_Day.NIGHT in commits
-
+class TestConvertHourToPartOfDay(unittest.TestCase):
 
     @parameterized.expand([
         (Part_Of_Day.MORNING, 0),
@@ -27,5 +18,3 @@ class TestGithubDataFetcher(unittest.TestCase):
         result = get_part_of_day(hour)
         assert isinstance(result, Part_Of_Day)
         self.assertEqual(result, expected_result)
-        
-        
