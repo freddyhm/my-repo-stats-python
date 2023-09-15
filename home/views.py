@@ -12,4 +12,4 @@ def home(request):
         "night": github_commits.get(Part_Of_Day.NIGHT, 0)
     }
     
-    return render(request, 'homepage/index.html', {'part_of_day': part_of_day })
+    return render(request, 'home/index.html', {'part_of_day': part_of_day })
