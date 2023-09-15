@@ -10,6 +10,11 @@ class TestGithub(unittest.TestCase):
     def test_get_part_of_day_percentage_of_commits(self):
         commits = get_github_commits()
         assert isinstance(commits, dict)
+        assert Part_Of_Day.MORNING in commits
+        assert Part_Of_Day.AFTERNOON in commits
+        assert Part_Of_Day.EVENING in commits
+        assert Part_Of_Day.NIGHT in commits
+
 
     @parameterized.expand([
         (Part_Of_Day.MORNING, 0),
