@@ -22,4 +22,4 @@ jobs:
         env:
           DJANGO_SETTINGS_MODULE: MyRepoStatsPythonProject.settings
         run: |
-          pytest MyRepoStatsPythonProject/playwright
+          pytest
