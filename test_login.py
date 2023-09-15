@@ -1,4 +1,7 @@
 import os
+import django
+django.setup()
+
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
 from playwright.sync_api import sync_playwright
 
