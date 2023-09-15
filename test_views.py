@@ -24,3 +24,9 @@ class MyViewTests(StaticLiveServerTestCase):
         page.goto(f"{self.live_server_url}/")
         assert page.title() == "MyRepoStatsPython"
         page.close()
+
+    def test_header_contains_name_of_project(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert page.inner_text('header') == "MyRepoStatsPython"
+        page.close()
