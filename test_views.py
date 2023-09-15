@@ -30,3 +30,9 @@ class MyViewTests(StaticLiveServerTestCase):
         page.goto(f"{self.live_server_url}/")
         assert page.inner_text('header') == "MyRepoStatsPython"
         page.close()
+
+    def test_body_contains_subtitle(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert "When are commits typically made during the day?" in page.inner_text('body')
+        page.close()
