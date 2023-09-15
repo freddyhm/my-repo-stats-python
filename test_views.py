@@ -36,3 +36,9 @@ class MyViewTests(StaticLiveServerTestCase):
         page.goto(f"{self.live_server_url}/")
         assert "When are commits typically made during the day?" in page.inner_text('body')
         page.close()
+
+    def test_body_contains_morning_entry(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert "Morning:" in page.inner_text('body')
+        page.close()
