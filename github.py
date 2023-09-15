@@ -1,4 +1,32 @@
 import requests
+import enum
+
+
+class Part_Of_Day(enum.Enum):
+    MORNING = 1
+    AFTERNOON = 2
+    EVENING = 3
+    NIGHT = 4
+    INVALID_HOUR = 5
+
+def get_part_of_day(hour):
+
+    is_morning = hour >= 0 and hour <= 11
+    is_afternoon = hour >= 12 and hour <= 17
+    is_evening = hour >= 18 and hour <= 20
+    is_night = hour >= 21 and hour <= 23
+
+    if is_morning:
+        return Part_Of_Day.MORNING
+    elif is_afternoon:
+        return Part_Of_Day.AFTERNOON
+    elif is_evening:
+        return Part_Of_Day.EVENING 
+    elif is_night:
+        return Part_Of_Day.NIGHT
+    else:
+        return Part_Of_Day.INVALID_HOUR
+
 
 def get_github_commits():
     api_url = "https://api.github.com/repos/freddyhm/MyRepoStats/commits"
