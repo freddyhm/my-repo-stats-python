@@ -20,7 +20,7 @@ jobs:
       - name: Install browsers
         run: playwright install chromium
       - name: Install browser dependencies
-        run: playwright install-deps
+        run: playwright install-deps chromium
       - name: Run tests
         env:
           DJANGO_SETTINGS_MODULE: MyRepoStatsPythonProject.settings
