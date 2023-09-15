@@ -20,7 +20,7 @@ jobs:
           pip install pytest pytest-playwright
       - name: Test with pytest
         env:
-          DJANGO_ALLOW_ASYNC_UNSAFE: 1
+          DJANGO_SETTINGS_MODULE: MyRepoStatsPythonProject.settings
         run: |
           cd MyRepoStatsPythonProject/playwright
           pytest
