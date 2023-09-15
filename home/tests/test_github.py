@@ -1,5 +1,4 @@
 import unittest
-import enum
 from parameterized import parameterized
 from github import get_github_commits
 from github import get_part_of_day
