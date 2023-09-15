@@ -29,7 +29,7 @@ def get_part_of_day(hour):
         return Part_Of_Day.INVALID_HOUR
 
 def get_github_commits():
-    api_url = "https://api.github.com/repos/freddyhm/MyRepoStats/commits?per_page=100"
+    api_url = "https://api.github.com/repos/freddyhm/my-repo-stats-python/commits?per_page=100"
     response = requests.get(api_url)
 
     if response.status_code == 200:
