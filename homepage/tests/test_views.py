@@ -19,7 +19,7 @@ class MyViewTests(StaticLiveServerTestCase):
         cls.playwright.stop() 
         super().tearDownClass() 
 
-    def test_login(self): 
+    def test_has_title(self): 
         page = self.browser.new_page()
         page.goto(f"{self.live_server_url}/")
         assert page.title() == "MyRepoStatsPython"
