@@ -61,4 +61,10 @@ class MyViewTests(StaticLiveServerTestCase):
         assert "Night:" in page.inner_text('body')
         page.close()
 
+    def test_footer_contains_repo_address(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert "https://github.com/freddyhm/my-repo-stats-python" in page.inner_text('footer')
+        page.close()
+
         
