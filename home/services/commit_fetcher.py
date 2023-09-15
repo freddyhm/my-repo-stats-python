@@ -27,7 +27,7 @@ def get_part_of_day(hour):
     else:
         return Part_Of_Day.INVALID_HOUR
 
-def get_github_commits():
+def get_part_of_day_percentage_of_commits():
     response = requests.get("https://api.github.com/repos/freddyhm/my-repo-stats-python/commits?per_page=100")
 
     if response.status_code == 200:
@@ -39,7 +39,7 @@ def get_github_commits():
 def format_raw_data(data):
     commit_hours = get_commit_hours(data)
     commits_by_part_of_day_count = group_commits_by_part_of_day_count(commit_hours)
-    commits_by_part_of_day_percentage = group_commits_by_part_of_day_percentage(len(get_commit_hours), commits_by_part_of_day_count)
+    commits_by_part_of_day_percentage = group_commits_by_part_of_day_percentage(len(commit_hours), commits_by_part_of_day_count)
     return commits_by_part_of_day_percentage
 
 def get_commit_hours(data):

@@ -1,8 +1,8 @@
 
 import unittest
 from parameterized import parameterized
-from home.services.github_data_fetcher import get_part_of_day
-from home.services.github_data_fetcher import Part_Of_Day
+from home.services.commit_fetcher import get_part_of_day
+from home.services.commit_fetcher import Part_Of_Day
 
 class TestConvertHourToPartOfDay(unittest.TestCase):
 
