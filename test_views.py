@@ -42,3 +42,9 @@ class MyViewTests(StaticLiveServerTestCase):
         page.goto(f"{self.live_server_url}/")
         assert "Morning:" in page.inner_text('body')
         page.close()
+
+    def test_body_contains_afternoon_entry(self): 
+        page = self.browser.new_page()
+        page.goto(f"{self.live_server_url}/")
+        assert "Afternoon:" in page.inner_text('body')
+        page.close()
