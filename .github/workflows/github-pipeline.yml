@@ -23,7 +23,7 @@ jobs:
         run: playwright install-deps chromium
       - name: Run tests
         env:
-          DJANGO_SETTINGS_MODULE: MyRepoStatsPythonProject.settings
+          DJANGO_SETTINGS_MODULE: my_repo_stats_python.settings
         run: pytest
   deploy:
     name: Deploy app
