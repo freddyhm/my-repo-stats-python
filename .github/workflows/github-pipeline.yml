@@ -21,17 +21,18 @@ jobs:
         run: playwright install chromium
       - name: Install browser dependencies
         run: playwright install-deps chromium
-      - name: Change directory to Frontend
-        run: cd frontend
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
       - name: Install React dependencies
+        working-directory: frontend
         run: npm install 
       - name: Start React App
+        working-directory: frontend  
         run: npm start 
       - name: Run tests
+        working-directory: backend 
         env:
           DJANGO_SETTINGS_MODULE: my_repo_stats_python.settings
         run: pytest
