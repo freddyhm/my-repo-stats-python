@@ -14,4 +14,6 @@ def api_home(request, username, repo,  *args, **kwargs):
     #     "night": part_of_day_percentage_of_commits.get(Part_Of_Day.NIGHT, 0)
     # }
 
-    return Response({'param1': username, 'param2': repo})
+    timezone = request.query_params.get('timezone')
+
+    return Response({'param1': username, 'param2': repo, 'timezone': timezone})

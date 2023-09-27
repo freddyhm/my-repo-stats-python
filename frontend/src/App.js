@@ -3,8 +3,9 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [repoName, setRepoName] = useState("");
+  const [username, setUsername] = useState("test");
+  const [repoName, setRepoName] = useState("ok");
+  const [selectedOption, setSelectedOption] = useState("America/Montreal");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -14,10 +15,14 @@ function App() {
     setRepoName(e.target.value);
   };
 
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   const getStats = () => {
     axios
       .get(
-        `http://localhost:8000/api/stats/username/${username}/repo/${repoName}/`
+        `http://localhost:8000/api/stats/username/${username}/repo/${repoName}/?timezone=${selectedOption}`
       )
       .then((response) => {
         console.log(response);
@@ -42,6 +47,13 @@ function App() {
           value={repoName}
           onChange={handleRepoNameChange}
         />
+      </p>
+      <p>
+        Timezone:
+        <select value={selectedOption} onChange={handleSelectChange}>
+          <option value="America/Montreal">America/Montreal</option>
+          <option value="America/Vancouver"> America/Vancouver</option>
+        </select>
       </p>
       <button onClick={getStats}>Get Stats</button>
     </div>
