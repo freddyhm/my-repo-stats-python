@@ -6,6 +6,12 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
 
 class MyViewTests(StaticLiveServerTestCase): 
+
+    @property
+    def live_server_url(self):
+        return "http://localhost:3000"
+     
+
     @classmethod 
     def setUpClass(cls):
         os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true" 
@@ -21,7 +27,7 @@ class MyViewTests(StaticLiveServerTestCase):
 
     def test_has_title(self): 
         page = self.browser.new_page()
-        page.goto(f"{self.live_server_url}/")
+        page.goto(f"{self.live_server_url}")
         assert page.title() == "MyRepoStatsPython"
         page.close()
 
