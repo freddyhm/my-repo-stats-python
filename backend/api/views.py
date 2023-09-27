@@ -1,7 +1,3 @@
-from rest_framework import generics
-from api.services.commit_fetcher import get_part_of_day_percentage_of_commits
-from api.services.commit_fetcher import Part_Of_Day
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
