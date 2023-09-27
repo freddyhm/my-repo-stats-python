@@ -27,22 +27,22 @@ def get_part_of_day(hour):
     else:
         return Part_Of_Day.INVALID_HOUR
 
-def get_part_of_day_percentage_of_commits():
-    response = requests.get("https://api.github.com/repos/freddyhm/my-repo-stats-python/commits?per_page=100")
+def get_part_of_day_percentage_of_commits(userName, repoName, timezone):
+    response = requests.get(f"https://api.github.com/repos/{userName}/{repoName}/commits?per_page=100")
 
     if response.status_code == 200:
         data = response.json()
-        return format_raw_data(data)
+        return format_raw_data(data, timezone)
     else:
         print("Error: ", response.status_code)
 
-def format_raw_data(data):
-    commit_hours = get_commit_hours(data)
+def format_raw_data(data, timezone):
+    commit_hours = get_commit_hours(data, timezone)
     commits_by_part_of_day_count = group_commits_by_part_of_day_count(commit_hours)
     commits_by_part_of_day_percentage = group_commits_by_part_of_day_percentage(len(commit_hours), commits_by_part_of_day_count)
     return commits_by_part_of_day_percentage
 
-def get_commit_hours(data):
+def get_commit_hours(data, timezone):
     commit_hours = []
 
     for commit in data:
@@ -51,7 +51,7 @@ def get_commit_hours(data):
         no_timezone_datetime = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%SZ")
         utc_datetime = pytz.timezone('UTC').localize(no_timezone_datetime)
 
-        localized_hour = utc_datetime.astimezone(pytz.timezone('US/Eastern')).hour
+        localized_hour = utc_datetime.astimezone(pytz.timezone(timezone)).hour
 
         commit_hours.append(localized_hour)
 

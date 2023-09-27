@@ -3,8 +3,8 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [username, setUsername] = useState("test");
-  const [repoName, setRepoName] = useState("ok");
+  const [username, setUsername] = useState("freddyhm");
+  const [repoName, setRepoName] = useState("my-repo-stats-python");
   const [selectedOption, setSelectedOption] = useState("America/Montreal");
 
   const handleUsernameChange = (e) => {
