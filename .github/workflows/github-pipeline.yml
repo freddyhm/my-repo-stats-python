@@ -21,6 +21,8 @@ jobs:
         run: playwright install chromium
       - name: Install browser dependencies
         run: playwright install-deps chromium
+      - name: Change directory to Frontend
+        run: cd frontend
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
