@@ -37,7 +37,7 @@ def api_home(request, username, repo,  *args, **kwargs):
     except NotFound:
         return Response("Username and/or repo name do not exist in Github", status=status.HTTP_404_NOT_FOUND)
     except Throttled:
-        return Response("Too many requests sent to Github", status=status.HTTP_429_TOO_MANY_REQUESTS)
+        return Response("Exceeded Github rate limit", status=status.HTTP_429_TOO_MANY_REQUESTS)
     except APIException:
         return Response("Could not fetch data from Github API", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
