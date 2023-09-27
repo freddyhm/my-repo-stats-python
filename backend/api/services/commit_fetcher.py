@@ -1,3 +1,5 @@
+from rest_framework.exceptions import NotFound, Throttled, APIException
+
 import requests
 import enum
 import datetime
@@ -30,11 +32,16 @@ def get_part_of_day(hour):
 def get_part_of_day_percentage_of_commits(userName, repoName, timezone):
     response = requests.get(f"https://api.github.com/repos/{userName}/{repoName}/commits?per_page=100")
 
-    if response.status_code == 200:
+    if response.status_code == 404:
+        raise NotFound()
+    elif response.status_code == 403:
+        raise Throttled()
+    elif response.status_code == 200:
         data = response.json()
         return format_raw_data(data, timezone)
     else:
-        print("Error: ", response.status_code)
+        print(f"api exception with status_code: {response.status_code}")
+        raise APIException()
 
 def format_raw_data(data, timezone):
     commit_hours = get_commit_hours(data, timezone)
