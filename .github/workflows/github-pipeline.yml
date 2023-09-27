@@ -30,9 +30,11 @@ jobs:
         run: npm install 
       - name: Start React App
         working-directory: frontend  
-        run: npm start 
+        run: npm start & # run in background
+      - name: Wait for Node.js server to start
+        run: sleep 10 
       - name: Run tests
-        working-directory: backend 
+        working-directory: backend/tests
         env:
           DJANGO_SETTINGS_MODULE: my_repo_stats_python.settings
         run: pytest
