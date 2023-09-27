@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import api_home
+from .views import api_home, StatsAPIView
 
 urlpatterns = [
-    path('', api_home) # localhost 
+    path('stats/username/<str:username>/repo/<str:repo>/', api_home) # localhost 
 ]
