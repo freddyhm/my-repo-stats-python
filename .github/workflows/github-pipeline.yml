@@ -21,6 +21,14 @@ jobs:
         run: playwright install chromium
       - name: Install browser dependencies
         run: playwright install-deps chromium
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install React dependencies
+        run: npm install 
+      - name: Start React App
+        run: npm start 
       - name: Run tests
         env:
           DJANGO_SETTINGS_MODULE: my_repo_stats_python.settings
