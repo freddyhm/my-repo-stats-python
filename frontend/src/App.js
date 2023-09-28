@@ -44,7 +44,7 @@ function App() {
         `${apiUrl}/api/stats/username/${username}/repo/${repoName}/?timezone=${selectedOption}`
       )
       .then((response) => {
-        setStat(response.data);
+        setStat(response.data.stat_content);
       })
       .catch((error) => {
         let error_message = formatErrorMessage(error);
