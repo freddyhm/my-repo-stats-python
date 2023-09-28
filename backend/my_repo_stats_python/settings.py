@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g$wljojyto=^n=+n-)i&d8)hx6sqg^jomgdd9gj(8@ln*0=m-&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-repo-stats-python.fly.dev']
+ALLOWED_HOSTS = ['my-repo-stats-python.fly.dev', 'localhost']
 
 
 # Application definition
