@@ -12,6 +12,8 @@ from django.core import validators
 from statreports.models import StatReport
 from statreports.serializers import StatReportSerializer
 
+from django.core.exceptions import ObjectDoesNotExist
+
 @api_view(["GET"])
 def api_get(request, username, repo,  *args, **kwargs):
 
@@ -28,25 +30,25 @@ def api_get(request, username, repo,  *args, **kwargs):
     except ValidationError as e:
         return Response({"error": e.message}, status=status.HTTP_400_BAD_REQUEST)
     
-
+    try:
+        instance = StatReport.objects.get(username=username, reponame=repo)
+    except ObjectDoesNotExist:
+        return Response({"error": "Stat report was not found for username and repo"}, status=status.HTTP_404_NOT_FOUND)
     
-    instance = StatReport.objects.get(username=username, reponame=repo)
-
-    if instance:
-        data = StatReportSerializer(instance).data
+    data = StatReportSerializer(instance).data
     
-    
-
     return Response(data)
+    
 
 
 
 @api_view(["POST"])
 def api_post(request, *args, **kwargs):
 
+
     timezone = request.data['timezone']
     username = request.data['username']
-    repo = request.data['repo']
+    repo = request.data['reponame']
 
     try:
         validators.validate_slug(username)
@@ -83,12 +85,15 @@ def api_post(request, *args, **kwargs):
     }
 
     serializer = StatReportSerializer(data=data)
+    
     if serializer.is_valid():
         instance = serializer.save()
-        print(instance)
-        return Response(serializer.data)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        data = StatReportSerializer(instance).data
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif "The fields username, reponame must make a unique set." in serializer.errors['non_field_errors']:
+        return Response({"error": "A report for this username and repo already exists"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    return Response({"error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 def validate_timezone(timezone):
     if timezone not in ["America/Montreal"]:

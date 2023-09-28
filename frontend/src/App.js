@@ -47,8 +47,28 @@ function App() {
         setStat(response.data.stat_content);
       })
       .catch((error) => {
-        let error_message = formatErrorMessage(error);
-        setError(error_message);
+
+        if (error.response.data.error === "Stat report was not found for username and repo") {
+            console.log("in here")
+            const reportData = {
+              username: username,
+              reponame: repoName,
+              timezone: selectedOption
+            }
+            axios
+              .post(`${apiUrl}/api/stats/create`, reportData)
+              .then((response) => {
+                setStat(response.data.stat_content);
+              })
+              .catch((error) => {
+                let error_message = formatErrorMessage(error);
+                setError(error_message);
+              })
+        } else {
+          console.log(error);
+          let error_message = formatErrorMessage(error);
+          setError(error_message);
+        }
       });
   };
 
