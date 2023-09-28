@@ -1,18 +1,16 @@
-from rest_framework.decorators import api_view
 from rest_framework import status
-from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound, Throttled, APIException
+from rest_framework.response import Response
 
-from api.services.commit_fetcher import get_part_of_day_percentage_of_commits
-from api.services.commit_fetcher import Part_Of_Day
+from api.services.commit_fetcher import get_part_of_day_percentage_of_commits, Part_Of_Day
 
-from django.core.exceptions import ValidationError
 from django.core import validators
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from statreports.models import StatReport
 from statreports.serializers import StatReportSerializer
 
-from django.core.exceptions import ObjectDoesNotExist
 
 @api_view(["GET"])
 def api_get(request, username, repo,  *args, **kwargs):
@@ -36,12 +34,9 @@ def api_get(request, username, repo,  *args, **kwargs):
         return Response({"error": "Stat report was not found for username and repo"}, status=status.HTTP_404_NOT_FOUND)
     
     data = StatReportSerializer(instance).data
-    
+
     return Response(data)
     
-
-
-
 @api_view(["POST"])
 def api_post(request, *args, **kwargs):
 
