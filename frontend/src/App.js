@@ -3,6 +3,8 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [error, setError] = useState("");
   const [stat, setStat] = useState("");
   const [username, setUsername] = useState("freddyhm");
@@ -39,7 +41,7 @@ function App() {
   const getStats = () => {
     axios
       .get(
-        `http://localhost:8000/api/stats/username/${username}/repo/${repoName}/?timezone=${selectedOption}`
+        `${apiUrl}/api/stats/username/${username}/repo/${repoName}/?timezone=${selectedOption}`
       )
       .then((response) => {
         setStat(response.data);
