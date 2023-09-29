@@ -1,14 +1,14 @@
 import unittest
-from api.services.commit_fetcher import get_part_of_day_percentage_of_commits
-from api.services.commit_fetcher import Part_Of_Day
+from api.services.commit_fetcher_service import CommitFetcherService
 
 class TestCommitFetcher(unittest.TestCase):
 
     def test_get_part_of_day_percentage_of_commits(self):
-        result = get_part_of_day_percentage_of_commits("freddyhm", "my-repo-stats-python", "America/Montreal")
+        commit_fetcher_service = CommitFetcherService("freddyhm", "my-repo-stats-python", "America/Montreal")
+        result = commit_fetcher_service.get_stats()
         assert isinstance(result, dict)
-        assert Part_Of_Day.MORNING in result
-        assert Part_Of_Day.AFTERNOON in result
-        assert Part_Of_Day.EVENING in result
-        assert Part_Of_Day.NIGHT in result
+        assert "morning" in result
+        assert "afternoon" in result
+        assert "evening" in result
+        assert "night" in result
         
