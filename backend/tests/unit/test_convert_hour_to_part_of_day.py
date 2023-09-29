@@ -1,8 +1,7 @@
 
 import unittest
 from parameterized import parameterized
-from backend.api.services.commit_fetcher_service import get_part_of_day
-from backend.api.services.commit_fetcher_service import Part_Of_Day
+from api.utilities.part_of_day import get_part_of_day, Part_Of_Day
 
 class TestConvertHourToPartOfDay(unittest.TestCase):
 

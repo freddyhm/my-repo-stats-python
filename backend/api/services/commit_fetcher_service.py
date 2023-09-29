@@ -1,11 +1,10 @@
-from rest_framework.exceptions import NotFound, Throttled, APIException
-
 import requests
-import enum
 import datetime
 import pytz
 
-import pdb
+from rest_framework.exceptions import NotFound, Throttled, APIException
+
+from api.utilities.part_of_day import Part_Of_Day
 
 class CommitFetcherService:
     def __init__(self, username, reponame, timezone):
@@ -90,10 +89,3 @@ class CommitFetcherService:
             else:
                 part_of_day_dict[part_of_day] = 1
         return part_of_day_dict
-
-class Part_Of_Day(enum.Enum):
-    MORNING = 1
-    AFTERNOON = 2
-    EVENING = 3
-    NIGHT = 4
-    INVALID_HOUR = 5
