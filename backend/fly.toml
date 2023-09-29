@@ -1,13 +1,16 @@
-# fly.toml app configuration file generated for my-repo-stats-python on 2023-09-15T15:12:24-04:00
+# fly.toml app configuration file generated for my-repo-stats on 2023-09-28T23:14:06-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "my-repo-stats-python"
+app = "my-repo-stats"
 primary_region = "yul"
 console_command = "/code/manage.py shell"
 
 [build]
+
+[deploy]
+  release_command = "python manage.py migrate"
 
 [env]
   PORT = "8000"

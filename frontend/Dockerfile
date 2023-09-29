@@ -29,6 +29,7 @@ RUN npm ci --include=dev
 # Copy application code
 COPY --link . .
 
+
 # Build application
 RUN npm run build
 
@@ -42,6 +43,8 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
+RUN npm install -g serve
+
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD [ "serve", "-s", "build"]

@@ -49,7 +49,6 @@ function App() {
       .catch((error) => {
 
         if (error.response.data.error === "Stat report was not found for username and repo") {
-            console.log("in here")
             const reportData = {
               username: username,
               reponame: repoName,
