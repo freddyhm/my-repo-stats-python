@@ -7,9 +7,9 @@ function App() {
 
   const [error, setError] = useState("");
   const [stat, setStat] = useState("");
-  const [username, setUsername] = useState("freddyhm");
-  const [repoName, setRepoName] = useState("my-repo-stats-python");
-  const [selectedOption, setSelectedOption] = useState("America/Montreal");
+  const [username, setUsername] = useState("");
+  const [repoName, setRepoName] = useState("");
+  const [timezone, setTimezoneChange] = useState("America/Montreal");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,29 +19,28 @@ function App() {
     setRepoName(e.target.value);
   };
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
+  const handleTimezoneChange = (e) => {
+    setTimezoneChange(e.target.value);
   };
 
   function formatErrorMessage(error) {
-
-    let message = "Unknown error: something went wrong";
-
-    if (error.code === 'ERR_NETWORK') {
-      message = "Error: Could not connect to the service :("
-    } else if (error.response.status === 404 || error.response.status === 500) {
-      message = "Error: " + error.response.data;
-    } else if (error.response.status === 429) {
-      message = "Error: Too many requests sent to Github, please try again in an hour!";
+    if (error.code === 'ERR_NETWORK') {      
+      return "Error: Could not connect to the service :(";
+    } else if (error.response.status ===  404) {
+      return "Error: Could not find username or repo name in Github. Make sure repo's visibility is public and try again.";
+    } else if (error.response.status ===  429) {
+      return "Error: Too many requests, try again in an hour.";
+    } else if (error.response.status ===  500 && error.message.includes("Github API")) {
+      return "Error: Could not fetch data from Github";  
+    }else{
+      return "Unknown error: something went wrong";
     }
-
-    return message;
   }
 
   const getStats = () => {
     axios
       .get(
-        `${apiUrl}/api/stats/username/${username}/repo/${repoName}/?timezone=${selectedOption}`
+        `${apiUrl}/api/stats/username/${username}/repo/${repoName}/?timezone=${timezone}`
       )
       .then((response) => {
         setStat(response.data.stat_content);
@@ -52,7 +51,7 @@ function App() {
             const reportData = {
               username: username,
               reponame: repoName,
-              timezone: selectedOption
+              timezone: timezone
             }
             axios
               .post(`${apiUrl}/api/stats/create`, reportData)
@@ -93,7 +92,7 @@ function App() {
         </p>
         <p>
           Timezone:
-          <select value={selectedOption} onChange={handleSelectChange}>
+          <select value={timezone} onChange={handleTimezoneChange}>
             <option value="America/Montreal">America/Montreal</option>
             <option value="America/Vancouver"> America/Vancouver</option>
           </select>
