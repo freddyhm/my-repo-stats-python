@@ -22,6 +22,7 @@ jobs:
         working-directory: backend
         env:
           DJANGO_SETTINGS_MODULE: my_repo_stats_python.settings
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: pytest
   deploy-backend:
     name: Deploy backend
