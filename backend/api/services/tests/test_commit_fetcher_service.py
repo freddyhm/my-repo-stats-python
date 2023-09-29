@@ -1,7 +1,6 @@
 import unittest
 from parameterized import parameterized
-from unittest.mock import Mock, patch
-from rest_framework.exceptions import NotFound, Throttled, APIException
+from unittest.mock import patch
 from api.services.commit_fetcher_service import CommitFetcherService
 from api.utilities.part_of_day import Part_Of_Day
 
