@@ -8,7 +8,8 @@ It is also part of a larger documented [here](https://dev.to/).
 
 ## Live site
 
-https://my-repo-stats-python.fly.dev/
+front-end: https://my-repo-stats-frontend.fly.dev/
+back-end:  https://my-repo-stats.fly.dev/
 
 ## Tools used
 
