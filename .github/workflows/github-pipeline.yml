@@ -33,6 +33,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+        name: Deploy back-end
         working-directory: backend
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - run: flyctl deploy --remote-only
+        name: Deploy front-end
+        working-directory: frontend
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_FRONT_END_TOKEN }}
