@@ -27,7 +27,7 @@ Back-end:  https://my-repo-stats.fly.dev/
 
 ## Technical Documents
 - [Link to all project documents](https://serious-swordtail-48f.notion.site/Project-Django-d6e9cfedc4cf4a8381079a92e8d5df10)
-- [Link to Architectural Document Records (ADRs)](docs)
+- [Link to Architectural Document Records (ADRs)](docs/decisions)
     - [What are ADRs?](https://adr.github.io/)
 - [Link to API Contracts](docs/contracts)
 
